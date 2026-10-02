@@ -34,7 +34,7 @@
       padding: 15px 10px;
     }
 
-    /* Cyberpunk Animated Matrix/Grid Background */
+    /* Animated Matrix/Grid Background */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -60,7 +60,7 @@
     header {
       width: 100%;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 10px;
       background: rgba(0, 0, 0, 0.6);
@@ -71,7 +71,7 @@
 
     .logo-title {
       font-weight: 900;
-      font-size: 1rem;
+      font-size: 1.1rem;
       letter-spacing: 2px;
       color: #fff;
       text-shadow: 0 0 8px var(--neon-red);
@@ -80,32 +80,10 @@
     .tag-2026 {
       background: var(--neon-red);
       color: #000;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       padding: 2px 6px;
       font-weight: 900;
-    }
-
-    .nav-group {
-      display: flex;
-      gap: 8px;
-    }
-
-    .nav-btn {
-      background: #000;
-      border: 1px solid var(--neon-cyan);
-      color: var(--neon-cyan);
-      padding: 6px 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-      transition: all 0.2s;
-    }
-
-    .nav-btn:hover, .nav-btn:active {
-      background: var(--neon-cyan);
-      color: #000;
-      box-shadow: 0 0 15px var(--neon-cyan);
+      margin-left: 6px;
     }
 
     /* Title Header */
@@ -235,6 +213,36 @@
       letter-spacing: 2px;
     }
 
+    /* Nav Group Below Card Center */
+    .nav-group-bottom {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 5px 0 10px 0;
+      width: 100%;
+    }
+
+    .nav-btn {
+      background: #000;
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      padding: 10px 24px;
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+      clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+      transition: all 0.2s;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    }
+
+    .nav-btn:hover, .nav-btn:active {
+      background: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 20px var(--neon-cyan);
+      transform: scale(1.05);
+    }
+
     /* Cyber Panel Footer */
     .cyber-footer {
       width: 100%;
@@ -276,10 +284,6 @@
       <div class="logo-title">
         MMS LEGENDS <span class="tag-2026">2026</span>
       </div>
-      <div class="nav-group">
-        <button class="nav-btn" onclick="prevCard()">&lt; PREV</button>
-        <button class="nav-btn" onclick="nextCard()">NEXT &gt;</button>
-      </div>
     </header>
 
     <div class="title-box">
@@ -297,12 +301,18 @@
         <div class="card-hud-info">
           <div class="hud-header">
             <span>STATUS: ACTIVE</span>
-            <span>ID: 001</span>
+            <span id="player-id">ID: 001</span>
           </div>
           <div class="player-name" id="player-name">GONE</div>
           <div class="player-role" id="player-role">JUNGLER</div>
         </div>
       </div>
+    </div>
+
+    <!-- Navigation Buttons Moved to Bottom Center -->
+    <div class="nav-group-bottom">
+      <button class="nav-btn" onclick="prevCard()">&lt; PREV</button>
+      <button class="nav-btn" onclick="nextCard()">NEXT &gt;</button>
     </div>
 
     <!-- Info Footer -->
@@ -322,9 +332,9 @@
 
   <script>
     const players = [
-      { name: "GONE", role: "JUNGLER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
-      { name: "SHIKO", role: "GOLDLANER", image: "IMG-20261002-WA0000.jpg" },
-      { name: "SUPERBRAIN", role: "ROAMER (CAPTAIN)", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" }
+      { id: "ID: 001", name: "GONE", role: "JUNGLER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
+      { id: "ID: 002", name: "SHIKO", role: "GOLDLANER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
+      { id: "ID: 003", name: "SUPERBRAIN", role: "ROAMER (CAPTAIN)", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" }
     ];
 
     let currentIndex = 0;
@@ -359,6 +369,7 @@
       const img = document.getElementById('player-img');
       const name = document.getElementById('player-name');
       const role = document.getElementById('player-role');
+      const playerId = document.getElementById('player-id');
 
       card.classList.add('glitching');
 
@@ -366,6 +377,7 @@
         img.src = players[currentIndex].image;
         name.textContent = players[currentIndex].name;
         role.textContent = players[currentIndex].role;
+        playerId.textContent = players[currentIndex].id;
       }, 100);
 
       setTimeout(() => {
@@ -445,4 +457,4 @@
     animate();
   </script>
 </body>
-  </html>
+</html>
