@@ -11,7 +11,7 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #060606;
+            background-color: #050505;
             color: #ffffff;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
@@ -22,7 +22,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.95);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: sticky;
             top: 0;
@@ -32,7 +32,7 @@
             font-weight: bold;
             letter-spacing: 2px;
             font-size: 18px;
-            color: #ff1e1e;
+            color: #ff0000;
         }
         /* Cinematic Showcase Stage */
         .showcase-section {
@@ -42,81 +42,81 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background: radial-gradient(circle at center, #1c1c1c 0%, #060606 80%);
+            background: radial-gradient(circle at center, #181818 0%, #050505 85%);
             padding: 40px 20px;
         }
         .showcase-title {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .showcase-title h1 {
-            font-size: clamp(28px, 5vw, 48px);
+            font-size: clamp(26px, 4vw, 42px);
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .showcase-title p {
             color: #888;
-            font-size: 14px;
-            letter-spacing: 1px;
+            font-size: 13px;
+            letter-spacing: 1.5px;
         }
 
-        /* Carousel / 3D Slide Effect Container */
+        /* 3D-Like Carousel Stage Container */
         .stage-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            height: 380px;
+            max-width: 650px;
+            height: 400px;
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 1000px;
+            perspective: 1200px;
         }
         .jersey-slide {
             position: absolute;
             width: 100%;
-            max-width: 420px;
+            max-width: 450px;
             opacity: 0;
-            transform: scale(0.85) translateX(60px);
+            transform: scale(0.8) translateZ(-100px);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
+            filter: drop-shadow(0 25px 35px rgba(0,0,0,0.9));
         }
         .jersey-slide.active {
             opacity: 1;
-            transform: scale(1) translateX(0);
+            transform: scale(1) translateZ(0);
             pointer-events: auto;
             z-index: 10;
         }
         .jersey-slide.prev {
-            opacity: 0.4;
-            transform: scale(0.8) translateX(-120px);
-            filter: blur(2px) brightness(0.6);
+            opacity: 0.3;
+            transform: scale(0.75) translateX(-140px) rotateY(15deg);
+            filter: blur(3px) brightness(0.5);
             z-index: 5;
         }
         .jersey-slide.next {
-            opacity: 0.4;
-            transform: scale(0.8) translateX(120px);
-            filter: blur(2px) brightness(0.6);
+            opacity: 0.3;
+            transform: scale(0.75) translateX(140px) rotateY(-15deg);
+            filter: blur(3px) brightness(0.5);
             z-index: 5;
         }
         
         .jersey-slide img {
             width: 100%;
             height: auto;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         /* Floor Reflection Effect */
         .stage-container::after {
             content: '';
             position: absolute;
-            bottom: -30px;
-            width: 80%;
-            height: 20px;
-            background: radial-gradient(ellipse at center, rgba(255, 30, 30, 0.3) 0%, transparent 70%);
-            filter: blur(10px);
+            bottom: -35px;
+            width: 75%;
+            height: 25px;
+            background: radial-gradient(ellipse at center, rgba(255, 0, 0, 0.35) 0%, transparent 70%);
+            filter: blur(12px);
             z-index: 1;
         }
 
@@ -124,37 +124,37 @@
         .controls-area {
             display: flex;
             gap: 15px;
-            margin-top: 40px;
+            margin-top: 45px;
             z-index: 20;
         }
         .control-btn {
             background: #111;
             color: #fff;
             border: 1px solid #444;
-            padding: 12px 30px;
+            padding: 12px 28px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             letter-spacing: 1px;
             transition: all 0.3s ease;
         }
         .control-btn:hover {
-            border-color: #ff1e1e;
+            border-color: #ff0000;
             background: #1a1a1a;
-            box-shadow: 0 0 15px rgba(255, 30, 30, 0.4);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
         }
         .control-btn.active {
-            background: #ff1e1e;
-            border-color: #ff1e1e;
-            box-shadow: 0 0 25px rgba(255, 30, 30, 0.6);
+            background: #ff0000;
+            border-color: #ff0000;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
         }
 
         /* Footer / Bottom Info */
         footer {
             text-align: center;
             padding: 30px;
-            color: #555;
+            color: #666;
             font-size: 13px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -172,19 +172,19 @@
             <p>ONE TEAM &bull; ONE FAMILY</p>
         </div>
 
-        <!-- Panggung Pameran Slider -->
+        <!-- Stage Pameran 3D Interaktif -->
         <div class="stage-container" id="stage">
-            <!-- Paparan Depan -->
+            <!-- Tampilan Depan -->
             <div class="jersey-slide active" id="slide-front">
                 <img src="IMG-20261002-WA0000.jpg" alt="MMS Jersey Front">
             </div>
-            <!-- Paparan Belakang (Simulasi efek slide/pusing) -->
+            <!-- Tampilan Belakang (Efek Simulasi Sudut 3D) -->
             <div class="jersey-slide next" id="slide-back">
                 <img src="IMG-20261002-WA0000.jpg" alt="MMS Jersey Back" style="transform: scaleX(-1);">
             </div>
         </div>
 
-        <!-- Butang Tukar View Macam Kedai Pro -->
+        <!-- Tombol Kontrol Interaktif -->
         <div class="controls-area">
             <button class="control-btn active" id="btn-front" onclick="changeSlide('front')">FRONT VIEW</button>
             <button class="control-btn" id="btn-back" onclick="changeSlide('back')">BACK VIEW</button>
