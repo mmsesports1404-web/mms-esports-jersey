@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MMS Esports - 3D Cinematic Showcase</title>
+    <title>MMS Legends - Official Lineup 2026</title>
     <style>
         * {
             margin: 0;
@@ -15,19 +15,21 @@
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        /* Top Header */
+        /* Header Atas */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 25px 50px;
             z-index: 100;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .brand-logo {
             font-weight: 800;
@@ -39,8 +41,8 @@
             gap: 10px;
         }
         .brand-logo span {
-            background: #fff;
-            color: #000;
+            background: #ff0000;
+            color: #fff;
             padding: 2px 8px;
             font-size: 11px;
             border-radius: 3px;
@@ -58,25 +60,53 @@
             color: #fff;
         }
 
-        /* Main 3D Carousel Stage (Macam dalam video) */
+        /* Bahagian Utama Showcase */
+        .showcase-section {
+            position: relative;
+            width: 100%;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section-title h1 {
+            font-size: clamp(24px, 4vw, 36px);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .section-title p {
+            color: #ff3333;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* 3D Carousel Stage */
         .showcase-stage {
             position: relative;
             width: 100%;
-            height: 60vh;
+            max-width: 1100px;
+            height: 480px;
             display: flex;
             justify-content: center;
             align-items: center;
             perspective: 1200px;
-            overflow: hidden;
+            margin: 0 auto;
         }
 
-        /* Latar Belakang Red Glow Sinematik */
+        /* Efek Red Glow Sinematik */
         .showcase-stage::before {
             content: '';
             position: absolute;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(220, 20, 60, 0.25) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.25) 0%, transparent 70%);
             border-radius: 50%;
             z-index: 1;
             filter: blur(50px);
@@ -85,7 +115,6 @@
         .carousel-track {
             position: relative;
             width: 100%;
-            max-width: 1000px;
             height: 100%;
             display: flex;
             justify-content: center;
@@ -93,89 +122,122 @@
             z-index: 2;
         }
 
-        /* Kad Produk Sebaris */
-        .jersey-item {
+        /* Kad Pemain */
+        .player-card {
             position: absolute;
             width: 280px;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
             text-align: center;
-            filter: brightness(0.4) blur(3px);
+            filter: brightness(0.3) blur(3px);
             transform: scale(0.75) translateZ(-150px);
-            opacity: 0.5;
+            opacity: 0.4;
+            background: #0d0d0d;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9);
         }
 
-        .jersey-item img {
+        .player-img-container {
+            position: relative;
             width: 100%;
-            height: auto;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            height: 320px;
+            overflow: hidden;
+            background: #111;
         }
 
-        .jersey-item .item-label {
-            margin-top: 15px;
-            font-size: 14px;
+        .player-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-bottom: 2px solid #ff0000;
+        }
+
+        .player-info {
+            padding: 18px;
+        }
+
+        .player-name {
+            font-size: 17px;
             letter-spacing: 2px;
+            font-weight: 800;
+            color: #666;
             text-transform: uppercase;
-            color: #777;
+        }
+
+        .player-role {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: #ff3333;
+            margin-top: 4px;
+            text-transform: uppercase;
             font-weight: 600;
         }
 
-        /* Posisi Kad Aktif (Tengah & Besar) */
-        .jersey-item.active {
+        /* Status Aktif (Tengah) */
+        .player-card.active {
             filter: brightness(1) blur(0);
-            transform: scale(1.15) translateZ(0);
+            transform: scale(1.12) translateZ(0);
             opacity: 1;
             z-index: 10;
+            border-color: rgba(255, 0, 0, 0.5);
+            box-shadow: 0 30px 60px rgba(255, 0, 0, 0.3);
         }
-        .jersey-item.active img {
-            border-color: rgba(220, 20, 60, 0.6);
-            box-shadow: 0 25px 50px rgba(220, 20, 60, 0.3);
-        }
-        .jersey-item.active .item-label {
+        .player-card.active .player-name {
             color: #fff;
         }
 
-        /* Posisi Kad Kiri (Prev) */
-        .jersey-item.prev {
-            transform: translateX(-320px) scale(0.8) rotateY(15deg);
+        /* Posisi Kiri & Kanan */
+        .player-card.prev {
+            transform: translateX(-310px) scale(0.8) rotateY(15deg);
+            z-index: 5;
+        }
+        .player-card.next {
+            transform: translateX(310px) scale(0.8) rotateY(-15deg);
             z-index: 5;
         }
 
-        /* Posisi Kad Kanan (Next) */
-        .jersey-item.next {
-            transform: translateX(320px) scale(0.8) rotateY(-15deg);
-            z-index: 5;
+        /* Bahagian Info Management & Roster List di Bawah */
+        .team-details-container {
+            max-width: 900px;
+            margin: 40px auto 20px auto;
+            padding: 25px;
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .detail-box h3 {
+            font-size: 13px;
+            color: #ff3333;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .detail-box ul {
+            list-style: none;
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.8;
+        }
+        .detail-box ul li span {
+            color: #fff;
+            font-weight: 600;
         }
 
-        /* Efek Pantulan Cermin di Bawah (Reflection) */
-        .showcase-stage::after {
-            content: '';
-            position: absolute;
-            bottom: 20px;
-            width: 60%;
-            height: 15px;
-            background: radial-gradient(ellipse at center, rgba(220, 20, 60, 0.4) 0%, transparent 70%);
-            filter: blur(10px);
-            z-index: 1;
-        }
-
-        /* Footer / Bawah Web */
+        /* Footer */
         footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 50px;
+            padding: 20px 50px;
             font-size: 12px;
-            color: #666;
+            color: #555;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 100;
-        }
-        .footer-center {
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #888;
+            background: #030303;
         }
         .scroll-hint {
             color: #ff3333;
@@ -189,50 +251,111 @@
     <!-- Header Atas -->
     <header>
         <div class="brand-logo">
-            MMS ESPORTS <span>2026</span>
+            MMS LEGENDS <span>2026</span>
         </div>
         <div class="top-right-menu">
             <div onclick="rotateCarousel('prev')">&#10094; Prev</div>
             <div onclick="rotateCarousel('next')">Next &#10095;</div>
-            <div>Shop Collection</div>
         </div>
     </header>
 
-    <!-- Panggung Pameran 3D Carousel -->
-    <section class="showcase-stage" id="stage" onclick="rotateCarousel('next')">
-        <div class="carousel-track">
-            
-            <!-- Item 1: Belakang -->
-            <div class="jersey-item prev" id="card-0" onclick="selectCard(0, event)">
-                <img src="IMG-20261002-WA0000.jpg" alt="Jersey Back" style="transform: scaleX(-1);">
-                <div class="item-label">CHILE 26 • BACK VIEW</div>
-            </div>
+    <!-- Panggung Carousel 3D Roster Utama -->
+    <section class="showcase-section">
+        <div class="section-title">
+            <h1>Official Main Lineup</h1>
+            <p>Click to Rotate &bull; 3D Cinematic Showcase</p>
+        </div>
 
-            <!-- Item 2: Depan (Aktif di Tengah) -->
-            <div class="jersey-item active" id="card-1" onclick="selectCard(1, event)">
-                <img src="IMG-20261002-WA0000.jpg" alt="Jersey Front">
-                <div class="item-label">MMS OFFICIAL • FRONT VIEW</div>
-            </div>
+        <div class="showcase-stage" id="stage" onclick="rotateCarousel('next')">
+            <div class="carousel-track">
+                
+                <!-- Player 1: GONE -->
+                <div class="player-card prev" id="card-0" onclick="selectCard(0, event)">
+                    <div class="player-img-container">
+                        <img src="IMG-20261002-WA0000.jpg" alt="GONE">
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">GONE</div>
+                        <div class="player-role">JUNGLER</div>
+                    </div>
+                </div>
 
-            <!-- Item 3: Samping / Detail -->
-            <div class="jersey-item next" id="card-2" onclick="selectCard(2, event)">
-                <img src="IMG-20261002-WA0000.jpg" alt="Jersey Detail">
-                <div class="item-label">EDITION • LIMITED</div>
-            </div>
+                <!-- Player 2: SHIKO -->
+                <div class="player-card" id="card-1" onclick="selectCard(1, event)">
+                    <div class="player-img-container">
+                        <img src="IMG-20261002-WA0000.jpg" alt="SHIKO">
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">SHIKO</div>
+                        <div class="player-role">GOLDLANER</div>
+                    </div>
+                </div>
 
+                <!-- Player 3: SAIGONZ -->
+                <div class="player-card" id="card-2" onclick="selectCard(2, event)">
+                    <div class="player-img-container">
+                        <img src="IMG-20261002-WA0000.jpg" alt="SAIGONZ">
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">SAIGONZ</div>
+                        <div class="player-role">MIDLANER</div>
+                    </div>
+                </div>
+
+                <!-- Player 4: SUPERBRAIN (Aktif di Tengah) -->
+                <div class="player-card active" id="card-3" onclick="selectCard(3, event)">
+                    <div class="player-img-container">
+                        <img src="IMG-20261002-WA0000.jpg" alt="SUPERBRAIN">
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">SUPERBRAIN</div>
+                        <div class="player-role">ROAMER (CAPTAIN)</div>
+                    </div>
+                </div>
+
+                <!-- Player 5: TATUT -->
+                <div class="player-card next" id="card-4" onclick="selectCard(4, event)">
+                    <div class="player-img-container">
+                        <img src="IMG-20261002-WA0000.jpg" alt="TATUT">
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">TATUT</div>
+                        <div class="player-role">EXPLANER</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Kotak Maklumat Pengurusan & Pasukan -->
+        <div class="team-details-container">
+            <div class="detail-box">
+                <h3>Management & Crew</h3>
+                <ul>
+                    <li>Founder: <span>SUPERBRAIN</span></li>
+                    <li>Sponsor: <span>MIFZAL</span></li>
+                    <li>Organizer / Editor: <span>HABIB</span></li>
+                </ul>
+            </div>
+            <div class="detail-box">
+                <h3>Reserve Roster</h3>
+                <ul>
+                    <li>Roamer (Reserve): <span>MIFZAL</span></li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <!-- Footer Bawah -->
+    <!-- Footer -->
     <footer>
         <div>© 2026 MMS ESPORTS. ALL RIGHTS RESERVED.</div>
-        <div class="footer-center scroll-hint">CLICK TO ROTATE &bull; INTERACTIVE 3D VIEW</div>
-        <div>TERMS & CONDITIONS</div>
+        <div class="scroll-hint">MMS LEGENDS MOBILE LEGENDS ROSTER</div>
+        <div>EDITION 2026</div>
     </footer>
 
     <script>
-        let currentIndex = 1;
-        const totalCards = 3;
+        let currentIndex = 3; // Mula dengan Superbrain di tengah
+        const totalCards = 5;
 
         function rotateCarousel(direction) {
             if (direction === 'next') {
@@ -244,7 +367,7 @@
         }
 
         function selectCard(index, event) {
-            event.stopPropagation(); // Elak konflik klik stage
+            event.stopPropagation();
             currentIndex = index;
             updateCarousel();
         }
@@ -252,10 +375,9 @@
         function updateCarousel() {
             for (let i = 0; i < totalCards; i++) {
                 const card = document.getElementById(`card-${i}`);
-                card.className = 'jersey-item'; // Reset class
+                card.className = 'player-card';
             }
 
-            // Tentukan posisi prev, active, next berdasarkan index semasa
             const activeCard = document.getElementById(`card-${currentIndex}`);
             const prevIndex = (currentIndex - 1 + totalCards) % totalCards;
             const nextIndex = (currentIndex + 1) % totalCards;
@@ -269,4 +391,4 @@
         }
     </script>
 </body>
-                                                                   </html>
+            </html>
