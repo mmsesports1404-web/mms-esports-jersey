@@ -1,1584 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MMS ESPORTS — Official Jersey 2026</title>
-
-<style>
-:root {
-    --black: #030406;
-    --black2: #090a0f;
-    --red: #e40032;
-    --red2: #ff1749;
-    --gold: #d8a85d;
-    --white: #f5f5f7;
-    --gray: #92939e;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: var(--black);
-    color: white;
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
-}
-
-body {
-    background:
-        radial-gradient(
-            circle at 70% 45%,
-            rgba(228, 0, 50, .16),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 30% 90%,
-            rgba(216, 168, 93, .08),
-            transparent 25%
-        ),
-        #030406;
-}
-
-/* =========================
-   CANVAS
-========================= */
-
-#scene {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-}
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 78px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 38px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(3,4,6,.95),
-            rgba(3,4,6,.45)
-        );
-
-    border-bottom: 1px solid rgba(255,255,255,.1);
-
-    backdrop-filter: blur(14px);
-
-    z-index: 20;
-}
-
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-
-    font-size: 13px;
-    font-weight: 800;
-
-    letter-spacing: .25em;
-}
-
-.logo-area img {
-    width: 42px;
-    height: 42px;
-
-    object-fit: cover;
-
-    border-radius: 8px;
-
-    box-shadow:
-        0 0 25px rgba(228,0,50,.25);
-}
-
-.navigation {
-    display: flex;
-    gap: 28px;
-
-    color: #999aa4;
-
-    font-size: 10px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .2em;
-}
-
-.navigation span:first-child {
-    color: white;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    position: fixed;
-
-    left: 7vw;
-    top: 21vh;
-
-    max-width: 470px;
-
-    z-index: 10;
-
-    pointer-events: none;
-}
-
-.kicker {
-    margin-bottom: 18px;
-
-    color: var(--gold);
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: .38em;
-}
-
-.hero h1 {
-    font-size: clamp(52px, 7vw, 100px);
-
-    line-height: .88;
-
-    letter-spacing: -.065em;
-
-    margin-bottom: 24px;
-}
-
-.hero h1 span {
-    color: var(--red);
-
-    text-shadow:
-        0 0 30px rgba(228,0,50,.35);
-}
-
-.hero p {
-    max-width: 400px;
-
-    color: #a7a8b2;
-
-    font-size: 14px;
-
-    line-height: 1.7;
-}
-
-.tags {
-    display: flex;
-
-    gap: 9px;
-
-    flex-wrap: wrap;
-
-    margin-top: 25px;
-}
-
-.tag {
-    padding: 9px 13px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    border-radius: 50px;
-
-    background:
-        rgba(255,255,255,.04);
-
-    color: #ddd;
-
-    font-size: 9px;
-
-    letter-spacing: .16em;
-
-    text-transform: uppercase;
-}
-
-/* =========================
-   CONTROL PANEL
-========================= */
-
-.panel {
-    position: fixed;
-
-    top: 105px;
-    right: 30px;
-
-    width: 285px;
-
-    padding: 19px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    border-radius: 18px;
-
-    background:
-        rgba(8,9,13,.72);
-
-    backdrop-filter: blur(18px);
-
-    box-shadow:
-        0 25px 80px rgba(0,0,0,.35);
-
-    z-index: 20;
-}
-
-.panel-title {
-    color: #ddd;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: .25em;
-
-    text-transform: uppercase;
-
-    margin-bottom: 14px;
-}
-
-.controls {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 8px;
-}
-
-button {
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    border-radius: 9px;
-
-    background:
-        rgba(255,255,255,.045);
-
-    color: white;
-
-    padding: 11px 8px;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: .13em;
-
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-
-    background:
-        rgba(255,255,255,.09);
-}
-
-button.active {
-    background:
-        rgba(228,0,50,.18);
-
-    border-color:
-        rgba(228,0,50,.65);
-
-    box-shadow:
-        0 0 20px rgba(228,0,50,.1);
-}
-
-.stats {
-    margin-top: 16px;
-}
-
-.stat {
-    display: flex;
-
-    justify-content: space-between;
-
-    padding: 10px 0;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.07);
-
-    font-size: 10px;
-}
-
-.stat span {
-    color: #777984;
-}
-
-.stat strong {
-    color: white;
-}
-
-/* =========================
-   REFERENCE CARD
-========================= */
-
-.reference {
-    position: fixed;
-
-    left: 28px;
-    bottom: 27px;
-
-    width: 230px;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    border-radius: 14px;
-
-    background:
-        rgba(8,9,13,.7);
-
-    backdrop-filter: blur(12px);
-
-    z-index: 20;
-}
-
-.reference img {
-    width: 100%;
-
-    display: block;
-
-    opacity: .8;
-}
-
-.reference-label {
-    padding: 10px 12px;
-
-    color: #8d8e98;
-
-    font-size: 8px;
-
-    letter-spacing: .18em;
-
-    text-transform: uppercase;
-}
-
-/* =========================
-   BOTTOM INFO
-========================= */
-
-.bottom-info {
-    position: fixed;
-
-    right: 30px;
-    bottom: 30px;
-
-    text-align: right;
-
-    z-index: 20;
-}
-
-.bottom-info small {
-    display: block;
-
-    margin-bottom: 5px;
-
-    color: #777984;
-
-    font-size: 8px;
-
-    letter-spacing: .2em;
-
-    text-transform: uppercase;
-}
-
-.bottom-info strong {
-    font-size: 28px;
-
-    letter-spacing: -.04em;
-}
-
-.hint {
-    position: fixed;
-
-    left: 50%;
-    bottom: 23px;
-
-    transform: translateX(-50%);
-
-    color: #777984;
-
-    font-size: 9px;
-
-    letter-spacing: .2em;
-
-    text-transform: uppercase;
-
-    z-index: 20;
-}
-
-/* =========================
-   LOADING
-========================= */
-
-.loading {
-    position: fixed;
-
-    inset: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #030406;
-
-    z-index: 100;
-
-    transition:
-        opacity .8s ease,
-        visibility .8s ease;
-}
-
-.loading.hide {
-    opacity: 0;
-
-    visibility: hidden;
-}
-
-.loader-content {
-    text-align: center;
-}
-
-.loader-logo {
-    width: 75px;
-
-    height: 75px;
-
-    object-fit: cover;
-
-    border-radius: 14px;
-
-    margin-bottom: 18px;
-
-    box-shadow:
-        0 0 40px rgba(228,0,50,.25);
-}
-
-.loader-title {
-    font-size: 10px;
-
-    letter-spacing: .4em;
-
-    margin-bottom: 16px;
-}
-
-.loader-line {
-    width: 180px;
-
-    height: 2px;
-
-    overflow: hidden;
-
-    background: #1d1e24;
-}
-
-.loader-line::after {
-    content: "";
-
-    display: block;
-
-    width: 40%;
-
-    height: 100%;
-
-    background: var(--red);
-
-    animation:
-        loading 1.1s
-        infinite
-        ease-in-out;
-}
-
-@keyframes loading {
-
-    0% {
-        transform: translateX(-120%);
-    }
-
-    100% {
-        transform: translateX(350%);
-    }
-
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width: 800px) {
-
-    .navbar {
-        height: 68px;
-
-        padding: 0 18px;
-    }
-
-    .navigation {
-        display: none;
-    }
-
-    .hero {
-        left: 22px;
-
-        top: 13vh;
-
-        max-width: 300px;
-    }
-
-    .hero h1 {
-        font-size: 54px;
-    }
-
-    .hero p {
-        font-size: 12px;
-    }
-
-    .panel {
-        top: auto;
-
-        right: 14px;
-
-        bottom: 80px;
-
-        width: 215px;
-
-        padding: 13px;
-    }
-
-    .reference {
-        display: none;
-    }
-
-    .bottom-info {
-        right: 17px;
-
-        bottom: 18px;
-    }
-
-    .hint {
-        display: none;
-    }
-
-}
-</style>
-</head> 
-    
-<body>
-<script>
-  window.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-      const loader = document.getElementById('loading');
-      if (loader) {
-        loader.style.display = 'none';
-      }
-    }, 2000);
-  });
-</script>
-
-
-<!-- =========================
-     LOADING SCREEN
-========================= -->
-
-<div class="loading" id="loading">
-
-    <div class="loader-content">
-
-        <img
-            class="loader-logo"
-            src="ManaManaSandar 20260825_220527.jpg"
-        >
-
-        <div class="loader-title">
-            MMS ESPORTS
-        </div>
-
-        <div class="loader-line"></div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     NAVBAR
-========================= -->
-
-<header class="navbar">
-
-    <div class="logo-area">
-
-        <img src="ManaManaSandar 20260825_220527.jpg">
-
-        <span>
-            MMS ESPORTS
-        </span>
-
-    </div>
-
-
-    <nav class="navigation">
-
-        <span>
-            Jersey 2026
-        </span>
-
-        <span>
-            Details
-        </span>
-
-        <span>
-            Team
-        </span>
-
-        <span>
-            Contact
-        </span>
-
-    </nav>
-
-</header>
-
-
-<!-- =========================
-     THREE JS
-========================= -->
-
-<div id="scene"></div>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero">
-
-    <div class="kicker">
-        OFFICIAL JERSEY 2026
-    </div>
-
-
-    <h1>
-
-        ONE TEAM.<br>
-
-        <span>
-            ONE FAMILY.
-        </span>
-
-    </h1>
-
-
-    <p>
-
-        Experience the official MMS Esports
-        2026 jersey in an interactive
-        cinematic 3D showcase.
-
-        Built with black, crimson red
-        and premium gold detailing.
-
-    </p>
-
-
-    <div class="tags">
-
-        <div class="tag">
-            UNIFI
-        </div>
-
-        <div class="tag">
-            MIFZAL
-        </div>
-
-        <div class="tag">
-            JURAGAN969
-        </div>
-
-        <div class="tag">
-            #10
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     CONTROL PANEL
-========================= -->
-
-<div style="text-align: center; padding: 20px; background: #0b0b0b; border-radius: 12px; margin: 20px auto;">
-    <h3 style="color: #ffffff; margin-bottom: 15px;">OFFICIAL JERSEY 2026</h3>
-    <img src="IMG-20261002-WA0000.jpg" alt="MMS Esports Jersey" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px;">
-</div>
-
-<!-- STYLING UNTUK EFEK 3D INTERAKTIF -->
-<style>
-    .mms-interactive-container {
-        text-align: center;
-        padding: 40px 20px;
-        background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
-        border-radius: 16px;
-        margin: 30px auto;
-        max-width: 700px;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-        border: 1px solid rgba(255, 0, 0, 0.2);
-        font-family: sans-serif;
-    }
-    .jersey-stage {
-        position: relative;
-        width: 100%;
-        max-width: 480px;
-        margin: 0 auto;
-        perspective: 1000px;
-    }
-    .jersey-card {
-        width: 100%;
-        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.4s ease;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(255, 0, 0, 0.25);
-        display: none;
-    }
-    .jersey-card.active {
-        display: block;
-        animation: fadeInZoom 0.5s ease forwards;
-    }
-    @keyframes fadeInZoom {
-        from { opacity: 0; transform: scale(0.95) translateY(10px); }
-        to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    /* Efek Pantulan Cahaya Bawah (Reflection) */
-    .jersey-card::after {
-        content: '';
-        position: absolute;
-        bottom: -20px;
-        left: 0;
-        right: 0;
-        height: 15px;
-        background: radial-gradient(ellipse at center, rgba(255,0,0,0.4) 0%, transparent 70%);
-        filter: blur(8px);
-    }
-    .jersey-controls {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        margin-top: 25px;
-    }
-    .jersey-btn {
-        background: #111;
-        color: #fff;
-        border: 1px solid #444;
-        padding: 10px 24px;
-        border-radius: 30px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        letter-spacing: 0.5px;
-    }
-    .jersey-btn:hover {
-        border-color: #ff0000;
-        background: #222;
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-    }
-    .jersey-btn.active-btn {
-        background: #ff0000;
-        border-color: #ff0000;
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-    }
-</style>
-
-<!-- PAPARAN UTAMA -->
-<div class="mms-interactive-container">
-    <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 20px; letter-spacing: 2px;">MMS ESPORTS 2026 SHOWCASE</h3>
-    <p style="color: #888; font-size: 13px; margin-bottom: 25px;">Interactive Cinematic View</p>
-    
-    <div class="jersey-stage">
-        <!-- Paparan Depan -->
-        <img id="jersey-front" src="IMG-20261002-WA0000.jpg" alt="Jersey Front" class="jersey-card active">
-        
-        <!-- Paparan Belakang (Boleh guna gambar sama atau asing kalau ada nanti) -->
-        <img id="jersey-back" src="IMG-20261002-WA0000.jpg" alt="Jersey Back" class="jersey-card" style="transform: scaleX(-1);">
-    </div>
-
-    <!-- Butang Kawalan Interaktif -->
-    <div class="jersey-controls">
-        <button id="btn-front" class="jersey-btn active-btn" onclick="showView('front')">FRONT VIEW</button>
-        <button id="btn-back" class="jersey-btn" onclick="showView('back')">BACK VIEW</button>
-    </div>
-</div>
-
-<!-- SCRIPT JS UNTUK TUKAR PAPARAN -->
-<script>
-    function showView(view) {
-        const frontImg = document.getElementById('jersey-front');
-        const backImg = document.getElementById('jersey-back');
-        const btnFront = document.getElementById('btn-front');
-        const btnBack = document.getElementById('btn-back');
-
-        if (view === 'front') {
-            frontImg.classList.add('active');
-            backImg.classList.remove('active');
-            btnFront.classList.add('active-btn');
-            btnBack.classList.remove('active-btn');
-        } else {
-            backImg.classList.add('active');
-            frontImg.classList.remove('active');
-            btnBack.classList.add('active-btn');
-            btnFront.classList.remove('active-btn');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMS Esports - Official 2026 Jersey Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }
-</script>
-
-
-<!-- =========================
-     BOTTOM
-========================= -->
-
-<div class="bottom-info">
-
-    <small>
-        Official Team Edition
-    </small>
-
-    <strong>
-        MMS / 2026
-    </strong>
-
-</div>
-
-
-<div class="hint">
-
-    DRAG TO ROTATE · SCROLL TO ZOOM
-
-</div>
-
-
-
-<script type="module">
-
-import * as THREE
-from "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js";
-
-import {
-    OrbitControls
-}
-from "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/controls/OrbitControls.js";
-
-
-
-/* =====================================
-   SCENE
-===================================== */
-
-const scene =
-    new THREE.Scene();
-
-
-scene.fog =
-    new THREE.FogExp2(
-        0x030406,
-        0.055
-    );
-
-
-
-/* =====================================
-   CAMERA
-===================================== */
-
-const camera =
-    new THREE.PerspectiveCamera(
-        35,
-        window.innerWidth /
-        window.innerHeight,
-        0.1,
-        100
-    );
-
-
-camera.position.set(
-    0,
-    0.7,
-    7.4
-);
-
-
-
-/* =====================================
-   RENDERER
-===================================== */
-
-const renderer =
-    new THREE.WebGLRenderer({
-
-        antialias: true,
-
-        alpha: true
-
-    });
-
-
-renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio,
-        2
-    )
-);
-
-
-renderer.setSize(
-    window.innerWidth,
-    window.innerHeight
-);
-
-
-renderer.outputColorSpace =
-    THREE.SRGBColorSpace;
-
-
-renderer.toneMapping =
-    THREE.ACESFilmicToneMapping;
-
-
-renderer.toneMappingExposure =
-    1.15;
-
-
-document
-    .getElementById("scene")
-    .appendChild(renderer.domElement);
-
-
-
-/* =====================================
-   ORBIT CONTROLS
-===================================== */
-
-const controls =
-    new OrbitControls(
-        camera,
-        renderer.domElement
-    );
-
-
-controls.enableDamping = true;
-
-controls.dampingFactor = .055;
-
-controls.enablePan = false;
-
-controls.minDistance = 4.5;
-
-controls.maxDistance = 10;
-
-controls.target.set(
-    0,
-    0,
-    0
-);
-
-
-
-/* =====================================
-   LIGHTS
-===================================== */
-
-const ambient =
-    new THREE.HemisphereLight(
-        0xffffff,
-        0x120507,
-        1.4
-    );
-
-scene.add(ambient);
-
-
-
-const mainLight =
-    new THREE.DirectionalLight(
-        0xffffff,
-        3.2
-    );
-
-mainLight.position.set(
-    4,
-    6,
-    5
-);
-
-scene.add(mainLight);
-
-
-
-const redLight =
-    new THREE.PointLight(
-        0xe40032,
-        12,
-        14
-    );
-
-redLight.position.set(
-    -3,
-    2,
-    3
-);
-
-scene.add(redLight);
-
-
-
-const goldLight =
-    new THREE.PointLight(
-        0xd8a85d,
-        8,
-        12
-    );
-
-goldLight.position.set(
-    3,
-    1,
-    -3
-);
-
-scene.add(goldLight);
-
-
-
-/* =====================================
-   JERSEY GROUP
-===================================== */
-
-const jersey =
-    new THREE.Group();
-
-scene.add(jersey);
-
-
-
-/* =====================================
-   MATERIALS
-===================================== */
-
-const blackMaterial =
-    new THREE.MeshStandardMaterial({
-
-        color: 0x08090d,
-
-        metalness: .25,
-
-        roughness: .42
-
-    });
-
-
-const redMaterial =
-    new THREE.MeshStandardMaterial({
-
-        color: 0xc8002e,
-
-        metalness: .15,
-
-        roughness: .5
-
-    });
-
-
-const darkRedMaterial =
-    new THREE.MeshStandardMaterial({
-
-        color: 0x650016,
-
-        metalness: .1,
-
-        roughness: .55
-
-    });
-
-
-const goldMaterial =
-    new THREE.MeshStandardMaterial({
-
-        color: 0xd8a85d,
-
-        metalness: .55,
-
-        roughness: .25,
-
-        emissive: 0x241506,
-
-        emissiveIntensity: .35
-
-    });
-
-
-
-/* =====================================
-   BODY
-===================================== */
-
-const bodyGeometry =
-    new THREE.BoxGeometry(
-        2.65,
-        3.75,
-        .55
-    );
-
-
-const body =
-    new THREE.Mesh(
-        bodyGeometry,
-        blackMaterial
-    );
-
-
-body.position.y = -.1;
-
-body.scale.x = .94;
-
-jersey.add(body);
-
-
-
-/* =====================================
-   LOWER RED BODY
-===================================== */
-
-const lowerGeometry =
-    new THREE.BoxGeometry(
-        2.5,
-        2.0,
-        .08
-    );
-
-
-const lower =
-    new THREE.Mesh(
-        lowerGeometry,
-        darkRedMaterial
-    );
-
-
-lower.position.set(
-    0,
-    -.9,
-    .31
-);
-
-jersey.add(lower);
-
-
-
-/* =====================================
-   SIDE RED PANELS
-===================================== */
-
-const sideGeometry =
-    new THREE.BoxGeometry(
-        .35,
-        3.15,
-        .08
-    );
-
-
-const leftPanel =
-    new THREE.Mesh(
-        sideGeometry,
-        redMaterial
-    );
-
-
-leftPanel.position.set(
-    -1.17,
-    -.05,
-    .32
-);
-
-
-leftPanel.rotation.z = -.08;
-
-
-jersey.add(leftPanel);
-
-
-
-const rightPanel =
-    new THREE.Mesh(
-        sideGeometry,
-        redMaterial
-    );
-
-
-rightPanel.position.set(
-    1.17,
-    -.05,
-    .32
-);
-
-
-rightPanel.rotation.z = .08;
-
-
-jersey.add(rightPanel);
-
-
-
-/* =====================================
-   GOLD SIDE STRIPES
-===================================== */
-
-const stripeGeometry =
-    new THREE.BoxGeometry(
-        .075,
-        2.8,
-        .1
-    );
-
-
-const stripeLeft =
-    new THREE.Mesh(
-        stripeGeometry,
-        goldMaterial
-    );
-
-
-stripeLeft.position.set(
-    -.95,
-    -.1,
-    .38
-);
-
-
-jersey.add(stripeLeft);
-
-
-
-const stripeRight =
-    new THREE.Mesh(
-        stripeGeometry,
-        goldMaterial
-    );
-
-
-stripeRight.position.set(
-    .95,
-    -.1,
-    .38
-);
-
-
-jersey.add(stripeRight);
-
-
-
-/* =====================================
-   SLEEVES
-===================================== */
-
-const sleeveGeometry =
-    new THREE.CylinderGeometry(
-        .5,
-        .67,
-        1.1,
-        24,
-        1,
-        false,
-        0,
-        Math.PI
-    );
-
-
-const leftSleeve =
-    new THREE.Mesh(
-        sleeveGeometry,
-        redMaterial
-    );
-
-
-leftSleeve.position.set(
-    -1.55,
-    1.15,
-    0
-);
-
-
-leftSleeve.rotation.z =
-    Math.PI / 2;
-
-
-jersey.add(leftSleeve);
-
-
-
-const rightSleeve =
-    new THREE.Mesh(
-        sleeveGeometry,
-        redMaterial
-    );
-
-
-rightSleeve.position.set(
-    1.55,
-    1.15,
-    0
-);
-
-
-rightSleeve.rotation.z =
-    -Math.PI / 2;
-
-
-jersey.add(rightSleeve);
-
-
-
-/* =====================================
-   COLLAR
-===================================== */
-
-const collar =
-    new THREE.Mesh(
-        new THREE.TorusGeometry(
-            .43,
-            .07,
-            12,
-            40
-        ),
-        blackMaterial
-    );
-
-
-collar.scale.set(
-    1.4,
-    .72,
-    1
-);
-
-
-collar.rotation.x =
-    Math.PI / 2;
-
-
-collar.position.set(
-    0,
-    1.77,
-    .32
-);
-
-
-jersey.add(collar);
-
-
-
-/* =====================================
-   TEXTURE CANVAS
-===================================== */
-
-function createJerseyTexture(
-    back = false
-) {
-
-    const canvas =
-        document.createElement(
-            "canvas"
-        );
-
-    canvas.width = 1024;
-
-    canvas.height = 1400;
-
-
-    const ctx =
-        canvas.getContext("2d");
-
-
-    /* Background */
-
-    const gradient =
-        ctx.createLinearGradient(
-            0,
-            0,
-            0,
-            1400
-        );
-
-
-    gradient.addColorStop(
-        0,
-        "#08090d"
-    );
-
-
-    gradient.addColorStop(
-        .5,
-        "#100b10"
-    );
-
-
-    gradient.addColorStop(
-        1,
-        "#78001f"
-    );
-
-
-    ctx.fillStyle = gradient;
-
-    ctx.fillRect(
-        0,
-        0,
-        1024,
-        1400
-    );
-
-
-    /* Red diagonal graphics */
-
-    ctx.fillStyle =
-        "#bd002c";
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(0,250);
-
-    ctx.lineTo(230,0);
-
-    ctx.lineTo(370,0);
-
-    ctx.lineTo(90,480);
-
-    ctx.closePath();
-
-    ctx.fill();
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(1024,250);
-
-    ctx.lineTo(800,0);
-
-    ctx.lineTo(670,0);
-
-    ctx.lineTo(950,480);
-
-    ctx.closePath();
-
-    ctx.fill();
-
-
-
-    if (back) {
-
-        /* PLAYER NAME */
-
-        ctx.textAlign = "center";
-
-        ctx.fillStyle = "#ffffff";
-
-        ctx.font =
-            "900 76px Arial";
-
-        ctx.fillText(
-            "JURAGAN969",
-            512,
-            250
-        );
-
-
-        /* NUMBER */
-
-        ctx.font =
-            "900 450px Arial";
-
-        ctx.lineWidth = 18;
-
-        ctx.strokeStyle =
-            "#111217";
-
-        ctx.strokeText(
-            "10",
-            512,
-            820
-        );
-
-        ctx.fillText(
-            "10",
-            512,
-            820
-        );
-
-
-        ctx.fillStyle =
-            "#d8a85d";
-
-        ctx.font =
-            "700 27px Arial";
-
-        ctx.fillText(
-            "MMS ESPORTS • 2026",
-            512,
-            970
-        );
-
-    } else {
-
-        /* LOGO */
-
-        const logo =
-            new Image();
-
-
-        logo.src =
-            "mms-logo.jpg";
-
-
-        logo.onload = () => {
-
-            ctx.drawImage(
-                logo,
-                400,
-     
+        body {
+            background-color: #060606;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        /* Top Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(10, 10, 10, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area {
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 18px;
+            color: #ff1e1e;
+        }
+        /* Cinematic Showcase Stage */
+        .showcase-section {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at center, #1c1c1c 0%, #060606 80%);
+            padding: 40px 20px;
+        }
+        .showcase-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .showcase-title h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .showcase-title p {
+            color: #888;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        /* Carousel / 3D Slide Effect Container */
+        .stage-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 380px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+        .jersey-slide {
+            position: absolute;
+            width: 100%;
+            max-width: 420px;
+            opacity: 0;
+            transform: scale(0.85) translateX(60px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
+        }
+        .jersey-slide.active {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+            pointer-events: auto;
+            z-index: 10;
+        }
+        .jersey-slide.prev {
+            opacity: 0.4;
+            transform: scale(0.8) translateX(-120px);
+            filter: blur(2px) brightness(0.6);
+            z-index: 5;
+        }
+        .jersey-slide.next {
+            opacity: 0.4;
+            transform: scale(0.8) translateX(120px);
+            filter: blur(2px) brightness(0.6);
+            z-index: 5;
+        }
+        
+        .jersey-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Floor Reflection Effect */
+        .stage-container::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            width: 80%;
+            height: 20px;
+            background: radial-gradient(ellipse at center, rgba(255, 30, 30, 0.3) 0%, transparent 70%);
+            filter: blur(10px);
+            z-index: 1;
+        }
+
+        /* Interactive Controls / Buttons */
+        .controls-area {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            z-index: 20;
+        }
+        .control-btn {
+            background: #111;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .control-btn:hover {
+            border-color: #ff1e1e;
+            background: #1a1a1a;
+            box-shadow: 0 0 15px rgba(255, 30, 30, 0.4);
+        }
+        .control-btn.active {
+            background: #ff1e1e;
+            border-color: #ff1e1e;
+            box-shadow: 0 0 25px rgba(255, 30, 30, 0.6);
+        }
+
+        /* Footer / Bottom Info */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">MMS ESPORTS</div>
+    </header>
+
+    <section class="showcase-section">
+        <div class="showcase-title">
+            <h1>Official Jersey 2026</h1>
+            <p>ONE TEAM &bull; ONE FAMILY</p>
+        </div>
+
+        <!-- Panggung Pameran Slider -->
+        <div class="stage-container" id="stage">
+            <!-- Paparan Depan -->
+            <div class="jersey-slide active" id="slide-front">
+                <img src="IMG-20261002-WA0000.jpg" alt="MMS Jersey Front">
+            </div>
+            <!-- Paparan Belakang (Simulasi efek slide/pusing) -->
+            <div class="jersey-slide next" id="slide-back">
+                <img src="IMG-20261002-WA0000.jpg" alt="MMS Jersey Back" style="transform: scaleX(-1);">
+            </div>
+        </div>
+
+        <!-- Butang Tukar View Macam Kedai Pro -->
+        <div class="controls-area">
+            <button class="control-btn active" id="btn-front" onclick="changeSlide('front')">FRONT VIEW</button>
+            <button class="control-btn" id="btn-back" onclick="changeSlide('back')">BACK VIEW</button>
+        </div>
+    </section>
+
+    <footer>
+        <small>Official Team Edition &bull; MMS / 2026</small>
+    </footer>
+
+    <script>
+        function changeSlide(view) {
+            const frontSlide = document.getElementById('slide-front');
+            const backSlide = document.getElementById('slide-back');
+            const btnFront = document.getElementById('btn-front');
+            const btnBack = document.getElementById('btn-back');
+
+            if (view === 'front') {
+                frontSlide.className = 'jersey-slide active';
+                backSlide.className = 'jersey-slide next';
+                btnFront.className = 'control-btn active';
+                btnBack.className = 'control-btn';
+            } else {
+                frontSlide.className = 'jersey-slide prev';
+                backSlide.className = 'jersey-slide active';
+                btnBack.className = 'control-btn active';
+                btnFront.className = 'control-btn';
+            }
+        }
+    </script>
+</body>
+</html>
