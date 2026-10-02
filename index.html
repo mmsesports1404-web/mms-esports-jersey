@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MMS Esports - Official 2026 Jersey Showcase</title>
+    <title>MMS Esports - 3D Cinematic Showcase</title>
     <style>
         * {
             margin: 0;
@@ -13,207 +13,260 @@
         body {
             background-color: #050505;
             color: #ffffff;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        /* Top Navigation */
+
+        /* Top Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            background: rgba(10, 10, 10, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            padding: 25px 50px;
+            z-index: 100;
         }
-        .logo-area {
-            font-weight: bold;
-            letter-spacing: 2px;
-            font-size: 18px;
-            color: #ff0000;
-        }
-        /* Cinematic Showcase Stage */
-        .showcase-section {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            background: radial-gradient(circle at center, #181818 0%, #050505 85%);
-            padding: 40px 20px;
-        }
-        .showcase-title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .showcase-title h1 {
-            font-size: clamp(26px, 4vw, 42px);
+        .brand-logo {
+            font-weight: 800;
             letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
+            font-size: 16px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .showcase-title p {
-            color: #888;
+        .brand-logo span {
+            background: #fff;
+            color: #000;
+            padding: 2px 8px;
+            font-size: 11px;
+            border-radius: 3px;
+        }
+        .top-right-menu {
+            display: flex;
+            gap: 20px;
             font-size: 13px;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #aaa;
+            cursor: pointer;
+        }
+        .top-right-menu div:hover {
+            color: #fff;
         }
 
-        /* 3D-Like Carousel Stage Container */
-        .stage-container {
+        /* Main 3D Carousel Stage (Macam dalam video) */
+        .showcase-stage {
             position: relative;
             width: 100%;
-            max-width: 650px;
-            height: 400px;
+            height: 60vh;
             display: flex;
             justify-content: center;
             align-items: center;
             perspective: 1200px;
-        }
-        .jersey-slide {
-            position: absolute;
-            width: 100%;
-            max-width: 450px;
-            opacity: 0;
-            transform: scale(0.8) translateZ(-100px);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: none;
-            filter: drop-shadow(0 25px 35px rgba(0,0,0,0.9));
-        }
-        .jersey-slide.active {
-            opacity: 1;
-            transform: scale(1) translateZ(0);
-            pointer-events: auto;
-            z-index: 10;
-        }
-        .jersey-slide.prev {
-            opacity: 0.3;
-            transform: scale(0.75) translateX(-140px) rotateY(15deg);
-            filter: blur(3px) brightness(0.5);
-            z-index: 5;
-        }
-        .jersey-slide.next {
-            opacity: 0.3;
-            transform: scale(0.75) translateX(140px) rotateY(-15deg);
-            filter: blur(3px) brightness(0.5);
-            z-index: 5;
-        }
-        
-        .jersey-slide img {
-            width: 100%;
-            height: auto;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            overflow: hidden;
         }
 
-        /* Floor Reflection Effect */
-        .stage-container::after {
+        /* Latar Belakang Red Glow Sinematik */
+        .showcase-stage::before {
             content: '';
             position: absolute;
-            bottom: -35px;
-            width: 75%;
-            height: 25px;
-            background: radial-gradient(ellipse at center, rgba(255, 0, 0, 0.35) 0%, transparent 70%);
-            filter: blur(12px);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+            filter: blur(50px);
+        }
+
+        .carousel-track {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* Kad Produk Sebaris */
+        .jersey-item {
+            position: absolute;
+            width: 280px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            text-align: center;
+            filter: brightness(0.4) blur(3px);
+            transform: scale(0.75) translateZ(-150px);
+            opacity: 0.5;
+        }
+
+        .jersey-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+
+        .jersey-item .item-label {
+            margin-top: 15px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #777;
+            font-weight: 600;
+        }
+
+        /* Posisi Kad Aktif (Tengah & Besar) */
+        .jersey-item.active {
+            filter: brightness(1) blur(0);
+            transform: scale(1.15) translateZ(0);
+            opacity: 1;
+            z-index: 10;
+        }
+        .jersey-item.active img {
+            border-color: rgba(220, 20, 60, 0.6);
+            box-shadow: 0 25px 50px rgba(220, 20, 60, 0.3);
+        }
+        .jersey-item.active .item-label {
+            color: #fff;
+        }
+
+        /* Posisi Kad Kiri (Prev) */
+        .jersey-item.prev {
+            transform: translateX(-320px) scale(0.8) rotateY(15deg);
+            z-index: 5;
+        }
+
+        /* Posisi Kad Kanan (Next) */
+        .jersey-item.next {
+            transform: translateX(320px) scale(0.8) rotateY(-15deg);
+            z-index: 5;
+        }
+
+        /* Efek Pantulan Cermin di Bawah (Reflection) */
+        .showcase-stage::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            width: 60%;
+            height: 15px;
+            background: radial-gradient(ellipse at center, rgba(220, 20, 60, 0.4) 0%, transparent 70%);
+            filter: blur(10px);
             z-index: 1;
         }
 
-        /* Interactive Controls / Buttons */
-        .controls-area {
-            display: flex;
-            gap: 15px;
-            margin-top: 45px;
-            z-index: 20;
-        }
-        .control-btn {
-            background: #111;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        .control-btn:hover {
-            border-color: #ff0000;
-            background: #1a1a1a;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-        }
-        .control-btn.active {
-            background: #ff0000;
-            border-color: #ff0000;
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
-        }
-
-        /* Footer / Bottom Info */
+        /* Footer / Bawah Web */
         footer {
-            text-align: center;
-            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 50px;
+            font-size: 12px;
             color: #666;
-            font-size: 13px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 100;
+        }
+        .footer-center {
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+        }
+        .scroll-hint {
+            color: #ff3333;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Atas -->
     <header>
-        <div class="logo-area">MMS ESPORTS</div>
+        <div class="brand-logo">
+            MMS ESPORTS <span>2026</span>
+        </div>
+        <div class="top-right-menu">
+            <div onclick="rotateCarousel('prev')">&#10094; Prev</div>
+            <div onclick="rotateCarousel('next')">Next &#10095;</div>
+            <div>Shop Collection</div>
+        </div>
     </header>
 
-    <section class="showcase-section">
-        <div class="showcase-title">
-            <h1>Official Jersey 2026</h1>
-            <p>ONE TEAM &bull; ONE FAMILY</p>
-        </div>
-
-        <!-- Stage Pameran 3D Interaktif -->
-        <div class="stage-container" id="stage">
-            <!-- Tampilan Depan -->
-            <div class="jersey-slide active" id="slide-front">
-                <img src="IMG-20261002-WA0000.jpg" alt="MMS Jersey Front">
+    <!-- Panggung Pameran 3D Carousel -->
+    <section class="showcase-stage" id="stage" onclick="rotateCarousel('next')">
+        <div class="carousel-track">
+            
+            <!-- Item 1: Belakang -->
+            <div class="jersey-item prev" id="card-0" onclick="selectCard(0, event)">
+                <img src="IMG-20261002-WA0000.jpg" alt="Jersey Back" style="transform: scaleX(-1);">
+                <div class="item-label">CHILE 26 • BACK VIEW</div>
             </div>
-            <!-- Tampilan Belakang (Efek Simulasi Sudut 3D) -->
-            <div class="jersey-slide next" id="slide-back">
-                <img src="IMG-20261002-WA0000.jpg" alt="MMS Jersey Back" style="transform: scaleX(-1);">
-            </div>
-        </div>
 
-        <!-- Tombol Kontrol Interaktif -->
-        <div class="controls-area">
-            <button class="control-btn active" id="btn-front" onclick="changeSlide('front')">FRONT VIEW</button>
-            <button class="control-btn" id="btn-back" onclick="changeSlide('back')">BACK VIEW</button>
+            <!-- Item 2: Depan (Aktif di Tengah) -->
+            <div class="jersey-item active" id="card-1" onclick="selectCard(1, event)">
+                <img src="IMG-20261002-WA0000.jpg" alt="Jersey Front">
+                <div class="item-label">MMS OFFICIAL • FRONT VIEW</div>
+            </div>
+
+            <!-- Item 3: Samping / Detail -->
+            <div class="jersey-item next" id="card-2" onclick="selectCard(2, event)">
+                <img src="IMG-20261002-WA0000.jpg" alt="Jersey Detail">
+                <div class="item-label">EDITION • LIMITED</div>
+            </div>
+
         </div>
     </section>
 
+    <!-- Footer Bawah -->
     <footer>
-        <small>Official Team Edition &bull; MMS / 2026</small>
+        <div>© 2026 MMS ESPORTS. ALL RIGHTS RESERVED.</div>
+        <div class="footer-center scroll-hint">CLICK TO ROTATE &bull; INTERACTIVE 3D VIEW</div>
+        <div>TERMS & CONDITIONS</div>
     </footer>
 
     <script>
-        function changeSlide(view) {
-            const frontSlide = document.getElementById('slide-front');
-            const backSlide = document.getElementById('slide-back');
-            const btnFront = document.getElementById('btn-front');
-            const btnBack = document.getElementById('btn-back');
+        let currentIndex = 1;
+        const totalCards = 3;
 
-            if (view === 'front') {
-                frontSlide.className = 'jersey-slide active';
-                backSlide.className = 'jersey-slide next';
-                btnFront.className = 'control-btn active';
-                btnBack.className = 'control-btn';
+        function rotateCarousel(direction) {
+            if (direction === 'next') {
+                currentIndex = (currentIndex + 1) % totalCards;
             } else {
-                frontSlide.className = 'jersey-slide prev';
-                backSlide.className = 'jersey-slide active';
-                btnBack.className = 'control-btn active';
-                btnFront.className = 'control-btn';
+                currentIndex = (currentIndex - 1 + totalCards) % totalCards;
             }
+            updateCarousel();
+        }
+
+        function selectCard(index, event) {
+            event.stopPropagation(); // Elak konflik klik stage
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            for (let i = 0; i < totalCards; i++) {
+                const card = document.getElementById(`card-${i}`);
+                card.className = 'jersey-item'; // Reset class
+            }
+
+            // Tentukan posisi prev, active, next berdasarkan index semasa
+            const activeCard = document.getElementById(`card-${currentIndex}`);
+            const prevIndex = (currentIndex - 1 + totalCards) % totalCards;
+            const nextIndex = (currentIndex + 1) % totalCards;
+
+            const prevCard = document.getElementById(`card-${prevIndex}`);
+            const nextCard = document.getElementById(`card-${nextIndex}`);
+
+            activeCard.classList.add('active');
+            prevCard.classList.add('prev');
+            nextCard.classList.add('next');
         }
     </script>
 </body>
-</html>
+                                                                   </html>
