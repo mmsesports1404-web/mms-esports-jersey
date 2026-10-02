@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MMS LEGENDS 2026</title>
+  <title>MMS LEGENDS 2026 - CYBERPUNK SHOWCASE</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap');
+
     :root {
-      --bg-dark: #070709;
-      --card-bg: #111116;
-      --red-primary: #ff1a3c;
-      --red-glow: rgba(255, 26, 60, 0.6);
-      --text-main: #ffffff;
-      --text-sub: #8a8d9b;
+      --neon-red: #ff0055;
+      --neon-cyan: #00f0ff;
+      --cyber-black: #050508;
+      --card-bg: rgba(12, 12, 20, 0.85);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Montserrat', sans-serif, system-ui;
+      font-family: 'Orbitron', sans-serif;
     }
 
     body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+      background-color: var(--cyber-black);
+      color: #fff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -31,10 +31,10 @@
       justify-content: space-between;
       overflow-x: hidden;
       position: relative;
-      padding: 20px 10px;
+      padding: 15px 10px;
     }
 
-    /* Animated Canvas Background */
+    /* Cyberpunk Animated Matrix/Grid Background */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -53,178 +53,222 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 15px;
     }
 
-    /* Header */
+    /* Header Cyberpunk */
     header {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 5px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--neon-red);
+      box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+      clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
     }
 
     .logo-title {
       font-weight: 900;
-      font-size: 1.1rem;
+      font-size: 1rem;
       letter-spacing: 2px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: #fff;
+      text-shadow: 0 0 8px var(--neon-red);
     }
 
     .tag-2026 {
-      background: var(--red-primary);
-      color: #fff;
-      font-size: 0.75rem;
+      background: var(--neon-red);
+      color: #000;
+      font-size: 0.7rem;
       padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: bold;
+      font-weight: 900;
+    }
+
+    .nav-group {
+      display: flex;
+      gap: 8px;
     }
 
     .nav-btn {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
+      background: #000;
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
       padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: 0.3s;
+      clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+      transition: all 0.2s;
     }
 
-    .nav-btn:hover {
-      border-color: var(--red-primary);
-      box-shadow: 0 0 10px var(--red-glow);
+    .nav-btn:hover, .nav-btn:active {
+      background: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 15px var(--neon-cyan);
     }
 
-    /* Showcase Title */
-    .section-header {
+    /* Title Header */
+    .title-box {
       text-align: center;
+      margin: 5px 0;
     }
 
-    .section-header h1 {
-      font-size: 1.5rem;
+    .title-box h1 {
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      color: #fff;
+      text-shadow: 2px 2px 0px var(--neon-red), -2px -2px 0px var(--neon-cyan);
+    }
+
+    .title-box p {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.8rem;
+      color: var(--neon-cyan);
       letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 800;
-      background: linear-gradient(180deg, #fff 0%, #aaa 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-weight: 700;
     }
 
-    .section-header p {
-      font-size: 0.7rem;
-      color: var(--red-primary);
-      letter-spacing: 1px;
-      margin-top: 4px;
-      text-transform: uppercase;
-    }
-
-    /* Player Card Showcase */
-    .showcase-wrapper {
-      position: relative;
+    /* Cyberpunk HUD Card */
+    .card-container {
       width: 100%;
-      height: 480px;
+      height: 440px;
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      perspective: 1000px;
     }
 
-    .card {
-      position: absolute;
-      width: 310px;
-      height: 450px;
-      background: #0f0f14;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 26, 60, 0.3);
-      box-shadow: 0 0 25px rgba(255, 26, 60, 0.25);
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    .cyber-card {
+      width: 320px;
+      height: 430px;
+      background: var(--card-bg);
+      border: 2px solid var(--neon-red);
+      position: relative;
+      clip-path: polygon(0 0, 92% 0, 100% 8%, 100% 100%, 8% 100%, 0 92%);
+      box-shadow: 0 0 25px rgba(255, 0, 85, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.2);
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .cyber-card:active {
+      transform: scale(0.98);
+    }
+
+    /* Scanline effect */
+    .scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--neon-cyan);
+      opacity: 0.7;
+      box-shadow: 0 0 10px var(--neon-cyan);
+      animation: scan 3s linear infinite;
+      z-index: 5;
+    }
+
+    @keyframes scan {
+      0% { top: 0%; }
+      100% { top: 100%; }
     }
 
     .card-img-box {
       width: 100%;
-      height: 360px;
+      height: 330px;
       position: relative;
+      background: #000;
       overflow: hidden;
-      background: radial-gradient(circle at center, #2a080c 0%, #000 100%);
     }
 
     .card-img-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
     }
 
-    .card-info {
-      height: 90px;
-      background: #0b0b0e;
-      border-top: 1px solid rgba(255, 26, 60, 0.2);
+    /* Glitch Animation Class */
+    .glitching img {
+      filter: drop-shadow(-5px 0px 0px var(--neon-cyan)) drop-shadow(5px 0px 0px var(--neon-red)) invert(10%);
+      transform: scale(1.05) skewX(3deg);
+      opacity: 0.7;
+    }
+
+    .card-hud-info {
+      height: 100px;
+      background: #080810;
+      border-top: 2px solid var(--neon-red);
+      padding: 10px 15px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 10px;
+      position: relative;
+    }
+
+    .hud-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: var(--neon-cyan);
+      margin-bottom: 4px;
     }
 
     .player-name {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 900;
-      letter-spacing: 2px;
       color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--neon-red);
     }
 
     .player-role {
-      font-size: 0.75rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.85rem;
       font-weight: 700;
-      color: var(--red-primary);
-      letter-spacing: 1px;
-      margin-top: 2px;
+      color: var(--neon-red);
+      letter-spacing: 2px;
     }
 
-    /* Footer Info */
-    .footer-info {
+    /* Cyber Panel Footer */
+    .cyber-footer {
       width: 100%;
-      background: rgba(15, 15, 20, 0.8);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 15px 20px;
+      background: rgba(10, 10, 16, 0.9);
+      border: 1px solid var(--neon-cyan);
+      padding: 12px 15px;
+      font-size: 0.75rem;
+      font-family: 'Rajdhani', sans-serif;
       display: flex;
       justify-content: space-between;
-      font-size: 0.75rem;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
     }
 
-    .info-col h4 {
-      color: var(--text-sub);
-      font-size: 0.65rem;
-      text-transform: uppercase;
+    .footer-col h4 {
+      color: var(--neon-cyan);
+      font-size: 0.7rem;
       letter-spacing: 1px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
     }
 
-    .info-col p {
-      color: #eee;
-      margin-bottom: 3px;
-    }
-
-    .info-col span {
-      color: var(--red-primary);
+    .footer-col p {
+      color: #ccc;
       font-weight: 600;
+    }
+
+    .footer-col span {
+      color: var(--neon-red);
     }
   </style>
 </head>
 <body>
 
-  <!-- Animated Flame/Particles Canvas -->
+  <!-- Animated Matrix & Digital Grid Background -->
   <canvas id="bg-canvas"></canvas>
 
   <div class="container">
@@ -232,124 +276,116 @@
       <div class="logo-title">
         MMS LEGENDS <span class="tag-2026">2026</span>
       </div>
-      <div>
+      <div class="nav-group">
         <button class="nav-btn" onclick="prevCard()">&lt; PREV</button>
         <button class="nav-btn" onclick="nextCard()">NEXT &gt;</button>
       </div>
     </header>
 
-    <div class="section-header">
-      <h1>Official Main Lineup</h1>
-      <p>Click Card to Rotate • 3D Cinematic Showcase</p>
+    <div class="title-box">
+      <h1>OFFICIAL MAIN LINEUP</h1>
+      <p>SYS.LOC: ONLINE // CLICK TO ROTATE</p>
     </div>
 
-    <!-- 3D Card Carousel -->
-    <div class="showcase-wrapper" onclick="nextCard()">
-      <div class="card" id="player-card">
+    <!-- Hologram Player Card -->
+    <div class="card-container">
+      <div class="cyber-card" id="cyber-card" onclick="nextCard()">
+        <div class="scanline"></div>
         <div class="card-img-box">
-          <img id="player-img" src="c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" alt="Player Image">
+          <img id="player-img" src="c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" alt="Player">
         </div>
-        <div class="card-info">
+        <div class="card-hud-info">
+          <div class="hud-header">
+            <span>STATUS: ACTIVE</span>
+            <span>ID: 001</span>
+          </div>
           <div class="player-name" id="player-name">GONE</div>
           <div class="player-role" id="player-role">JUNGLER</div>
         </div>
       </div>
     </div>
 
-    <div class="footer-info">
-      <div class="info-col">
-        <h4>Management & Crew</h4>
+    <!-- Info Footer -->
+    <div class="cyber-footer">
+      <div class="footer-col">
+        <h4>MANAGEMENT & CREW</h4>
         <p>Founder: <span>SUPERBRAIN</span></p>
         <p>Sponsor: <span>MIFZAL</span></p>
-        <p>Organizer / Editor: <span>HABIB</span></p>
+        <p>Editor: <span>HABIB</span></p>
       </div>
-      <div class="info-col">
-        <h4>Reserve Roster</h4>
-        <p>Roamer (Reserve): <span>MIFZAL</span></p>
+      <div class="footer-col">
+        <h4>RESERVE ROSTER</h4>
+        <p>Roamer: <span>MIFZAL</span></p>
       </div>
     </div>
   </div>
 
   <script>
-    // Data Senarai Pemain
     const players = [
-      {
-        name: "GONE",
-        role: "JUNGLER",
-        image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg"
-      },
-      {
-        name: "SHIKO",
-        role: "GOLDLANER",
-        image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg"
-      },
-      {
-        name: "SUPERBRAIN",
-        role: "ROAMER (CAPTAIN)",
-        image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg"
-      }
+      { name: "GONE", role: "JUNGLER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
+      { name: "SHIKO", role: "GOLDLANER", image: "IMG-20261002-WA0000.jpg" },
+      { name: "SUPERBRAIN", role: "ROAMER (CAPTAIN)", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" }
     ];
 
     let currentIndex = 0;
 
-    // Web Audio API Sound Pop (Tanpa perlu file audio luaran)
+    // Cyber Sound Pop Synth (Web Audio API)
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
-    function playPopSound() {
+
+    function playCyberPop() {
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
 
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.08);
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.1);
 
-      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
 
       osc.connect(gain);
       gain.connect(audioCtx.destination);
 
       osc.start();
-      osc.stop(audioCtx.currentTime + 0.08);
+      osc.stop(audioCtx.currentTime + 0.1);
     }
 
-    // Fungsi Menukar Kad Pemain
+    // Update Player & Glitch Effect
     function updateCard() {
-      const card = document.getElementById('player-card');
+      const card = document.getElementById('cyber-card');
       const img = document.getElementById('player-img');
       const name = document.getElementById('player-name');
       const role = document.getElementById('player-role');
 
-      // Kesan Animasi Tukar Kad
-      card.style.transform = 'scale(0.9) rotateY(20deg)';
-      card.style.opacity = '0.5';
+      card.classList.add('glitching');
 
       setTimeout(() => {
         img.src = players[currentIndex].image;
         name.textContent = players[currentIndex].name;
         role.textContent = players[currentIndex].role;
+      }, 100);
 
-        card.style.transform = 'scale(1) rotateY(0deg)';
-        card.style.opacity = '1';
-      }, 150);
+      setTimeout(() => {
+        card.classList.remove('glitching');
+      }, 250);
     }
 
     function nextCard() {
-      playPopSound();
+      playCyberPop();
       currentIndex = (currentIndex + 1) % players.length;
       updateCard();
     }
 
     function prevCard() {
-      playPopSound();
+      playCyberPop();
       currentIndex = (currentIndex - 1 + players.length) % players.length;
       updateCard();
     }
 
-    // Interactive Particles Background Animation
+    // Cyberpunk Matrix/Grid Background Animation
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
 
@@ -361,41 +397,52 @@
     resizeCanvas();
 
     const particles = [];
-    for (let i = 0; i < 65; i++) {
+    for (let i = 0; i < 50; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 2 + 0.5,
-        speedY: Math.random() * 1.5 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.5,
-        alpha: Math.random()
+        length: Math.random() * 20 + 10,
+        speed: Math.random() * 3 + 1,
+        color: Math.random() > 0.5 ? '#ff0055' : '#00f0ff'
       });
     }
 
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function animate() {
+      ctx.fillStyle = 'rgba(5, 5, 8, 0.2)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      // Draw Grid Lines
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.05)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < canvas.width; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+
+      // Draw Digital Matrix Beams
       particles.forEach(p => {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 26, 60, ${p.alpha})`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#ff1a3c';
-        ctx.fill();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x, p.y + p.length);
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = 2;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = p.color;
+        ctx.stroke();
 
-        p.y -= p.speedY;
-        p.x += p.speedX;
-
-        if (p.y < 0) {
-          p.y = canvas.height;
+        p.y += p.speed;
+        if (p.y > canvas.height) {
+          p.y = -p.length;
           p.x = Math.random() * canvas.width;
         }
       });
 
-      requestAnimationFrame(animateParticles);
+      requestAnimationFrame(animate);
     }
 
-    animateParticles();
+    animate();
   </script>
 </body>
-              </html>
+  </html>
