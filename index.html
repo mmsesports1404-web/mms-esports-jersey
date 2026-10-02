@@ -331,7 +331,7 @@
         </div>
         <div class="card-hud-info">
           <div class="hud-header">
-            <span>STATUS: ACTIVE</span>
+            <span id="player-status">STATUS: ACTIVE</span>
             <span id="player-id">ID: 001</span>
           </div>
           <div class="player-name" id="player-name">GONE</div>
@@ -362,10 +362,14 @@
   </div>
 
   <script>
+    // Senarai Penuh 6 Pemain MMS LEGENDS
     const players = [
-      { id: "ID: 001", name: "GONE", role: "JUNGLER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
-      { id: "ID: 002", name: "SHIKO", role: "GOLDLANER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
-      { id: "ID: 003", name: "SUPERBRAIN", role: "ROAMER (CAPTAIN)", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" }
+      { id: "ID: 001", status: "STATUS: ACTIVE", name: "GONE", role: "JUNGLER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
+      { id: "ID: 002", status: "STATUS: ACTIVE", name: "SHIKO", role: "GOLDLANER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
+      { id: "ID: 003", status: "STATUS: ACTIVE", name: "SUPERBRAIN", role: "ROAMER (CAPTAIN)", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
+      { id: "ID: 004", status: "STATUS: ACTIVE", name: "TATUT", role: "EXP LANER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
+      { id: "ID: 005", status: "STATUS: ACTIVE", name: "SAIGONZ", role: "MIDLANER", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" },
+      { id: "ID: 006", status: "STATUS: RESERVE", name: "MIFZAL", role: "ROAMER (RESERVE)", image: "c57478d1-2ddc-4dde-8272-9f0804d24d1a.jpeg" }
     ];
 
     let currentIndex = 0;
@@ -405,22 +409,21 @@
       const name = document.getElementById('player-name');
       const role = document.getElementById('player-role');
       const playerId = document.getElementById('player-id');
+      const playerStatus = document.getElementById('player-status');
 
       playCyberPop();
 
-      // Tambah class animasi pusingan
       const animClass = direction === 'next' ? 'spin-next' : 'spin-prev';
       card.classList.add(animClass);
 
-      // Kemaskini data pemain pada separuh pusingan (300ms)
       setTimeout(() => {
         img.src = players[currentIndex].image;
         name.textContent = players[currentIndex].name;
         role.textContent = players[currentIndex].role;
         playerId.textContent = players[currentIndex].id;
+        playerStatus.textContent = players[currentIndex].status;
       }, 300);
 
-      // Buang class animasi selepas selesai (600ms)
       setTimeout(() => {
         card.classList.remove(animClass);
         isAnimating = false;
@@ -465,7 +468,6 @@
       ctx.fillStyle = 'rgba(5, 5, 8, 0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw Grid Lines
       ctx.strokeStyle = 'rgba(0, 240, 255, 0.05)';
       ctx.lineWidth = 1;
       for (let x = 0; x < canvas.width; x += 40) {
@@ -475,7 +477,6 @@
         ctx.stroke();
       }
 
-      // Draw Digital Matrix Beams
       particles.forEach(p => {
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
@@ -499,4 +500,4 @@
     animate();
   </script>
 </body>
-  </html>
+              </html>
