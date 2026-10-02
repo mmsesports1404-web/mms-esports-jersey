@@ -755,19 +755,122 @@ button.active {
     <img src="IMG-20261002-WA0000.jpg" alt="MMS Esports Jersey" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px;">
 </div>
 
-<!-- =========================
-     REFERENCE
-========================= -->
+<!-- STYLING UNTUK EFEK 3D INTERAKTIF -->
+<style>
+    .mms-interactive-container {
+        text-align: center;
+        padding: 40px 20px;
+        background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+        border-radius: 16px;
+        margin: 30px auto;
+        max-width: 700px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+        border: 1px solid rgba(255, 0, 0, 0.2);
+        font-family: sans-serif;
+    }
+    .jersey-stage {
+        position: relative;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+        perspective: 1000px;
+    }
+    .jersey-card {
+        width: 100%;
+        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.4s ease;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(255, 0, 0, 0.25);
+        display: none;
+    }
+    .jersey-card.active {
+        display: block;
+        animation: fadeInZoom 0.5s ease forwards;
+    }
+    @keyframes fadeInZoom {
+        from { opacity: 0; transform: scale(0.95) translateY(10px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    /* Efek Pantulan Cahaya Bawah (Reflection) */
+    .jersey-card::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        right: 0;
+        height: 15px;
+        background: radial-gradient(ellipse at center, rgba(255,0,0,0.4) 0%, transparent 70%);
+        filter: blur(8px);
+    }
+    .jersey-controls {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 25px;
+    }
+    .jersey-btn {
+        background: #111;
+        color: #fff;
+        border: 1px solid #444;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+    }
+    .jersey-btn:hover {
+        border-color: #ff0000;
+        background: #222;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    }
+    .jersey-btn.active-btn {
+        background: #ff0000;
+        border-color: #ff0000;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    }
+</style>
 
-<div class="reference">
-
-    <img src="IMG-20261002-WA0000.jpg">
-
-    <div class="reference-label">
-        Official Jersey Reference
+<!-- PAPARAN UTAMA -->
+<div class="mms-interactive-container">
+    <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 20px; letter-spacing: 2px;">MMS ESPORTS 2026 SHOWCASE</h3>
+    <p style="color: #888; font-size: 13px; margin-bottom: 25px;">Interactive Cinematic View</p>
+    
+    <div class="jersey-stage">
+        <!-- Paparan Depan -->
+        <img id="jersey-front" src="IMG-20261002-WA0000.jpg" alt="Jersey Front" class="jersey-card active">
+        
+        <!-- Paparan Belakang (Boleh guna gambar sama atau asing kalau ada nanti) -->
+        <img id="jersey-back" src="IMG-20261002-WA0000.jpg" alt="Jersey Back" class="jersey-card" style="transform: scaleX(-1);">
     </div>
 
+    <!-- Butang Kawalan Interaktif -->
+    <div class="jersey-controls">
+        <button id="btn-front" class="jersey-btn active-btn" onclick="showView('front')">FRONT VIEW</button>
+        <button id="btn-back" class="jersey-btn" onclick="showView('back')">BACK VIEW</button>
+    </div>
 </div>
+
+<!-- SCRIPT JS UNTUK TUKAR PAPARAN -->
+<script>
+    function showView(view) {
+        const frontImg = document.getElementById('jersey-front');
+        const backImg = document.getElementById('jersey-back');
+        const btnFront = document.getElementById('btn-front');
+        const btnBack = document.getElementById('btn-back');
+
+        if (view === 'front') {
+            frontImg.classList.add('active');
+            backImg.classList.remove('active');
+            btnFront.classList.add('active-btn');
+            btnBack.classList.remove('active-btn');
+        } else {
+            backImg.classList.add('active');
+            frontImg.classList.remove('active');
+            btnBack.classList.add('active-btn');
+            btnFront.classList.remove('active-btn');
+        }
+    }
+</script>
 
 
 <!-- =========================
